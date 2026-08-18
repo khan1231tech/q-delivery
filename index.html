@@ -12,19 +12,23 @@ button{cursor:pointer}
 .hidden{display:none!important}
 
 .top{
-background:#111827;color:#fff;padding:15px 22px;
+background:#111827;color:white;padding:15px 22px;
 display:flex;justify-content:space-between;align-items:center;
 position:sticky;top:0;z-index:20
 }
 .logo{font-size:23px;font-weight:bold}
 .top-right{display:flex;gap:8px}
-.top-btn{border:0;padding:10px 13px;border-radius:9px;background:#2563eb;color:white;font-weight:bold}
+.top-btn{
+border:0;padding:10px 13px;border-radius:9px;
+background:#2563eb;color:white;font-weight:bold
+}
 
 .page{max-width:1150px;margin:auto;padding:25px}
 
 .hero{
 background:linear-gradient(135deg,#2563eb,#16a34a);
-color:white;padding:38px 28px;border-radius:22px;margin-bottom:25px
+color:white;padding:38px 28px;border-radius:22px;
+margin-bottom:25px
 }
 .hero h1{font-size:36px;margin-bottom:10px}
 .hero p{margin-bottom:20px}
@@ -103,11 +107,14 @@ padding:20px;z-index:50
 background:white;border-radius:20px;padding:25px;
 width:100%;max-width:520px;max-height:90vh;overflow:auto
 }
-.close{float:right;border:0;background:none;font-size:23px}
+.close{
+float:right;border:0;background:none;font-size:23px
+}
 
 .menu{
-display:flex;justify-content:space-between;align-items:center;
-padding:15px 0;border-bottom:1px solid #eee
+display:flex;justify-content:space-between;
+align-items:center;padding:15px 0;
+border-bottom:1px solid #eee
 }
 .price{color:#16a34a;font-weight:bold}
 
@@ -116,7 +123,8 @@ display:flex;justify-content:space-between;padding:8px 0
 }
 .big-total{
 font-size:21px;font-weight:bold;
-border-top:1px solid #ddd;margin-top:10px;padding-top:12px
+border-top:1px solid #ddd;margin-top:10px;
+padding-top:12px
 }
 
 .badge{
@@ -133,8 +141,8 @@ display:flex;justify-content:space-between;
 margin:25px 0;position:relative
 }
 .track-step{
-text-align:center;position:relative;z-index:2;
-font-size:12px;width:25%
+text-align:center;position:relative;
+z-index:2;font-size:12px;width:25%
 }
 .track-icon{
 width:40px;height:40px;border-radius:50%;
@@ -146,17 +154,27 @@ background:#16a34a;color:white
 }
 
 .admin-layout{display:flex;min-height:100vh}
+
 .sidebar{
 width:230px;background:#111827;color:white;
 padding:20px;position:fixed;height:100vh
 }
 .sidebar h2{text-align:center;margin-bottom:25px}
+
 .sidebar button{
 display:block;width:100%;padding:12px;margin:6px 0;
 border:0;background:transparent;color:#ddd;
 text-align:left;border-radius:9px
 }
-.sidebar button:hover{background:#2563eb;color:white}
+.sidebar button:hover{
+background:#2563eb;color:white
+}
+
+.close-admin{
+background:#dc2626!important;
+color:white!important;
+font-weight:bold
+}
 
 .admin-main{
 margin-left:230px;padding:25px;
@@ -167,10 +185,12 @@ width:calc(100% - 230px)
 display:grid;grid-template-columns:repeat(4,1fr);
 gap:15px;margin-bottom:20px
 }
+
 .stat{
 background:white;padding:20px;border-radius:15px;
 box-shadow:0 4px 15px rgba(0,0,0,.06)
 }
+
 .stat h2{font-size:28px;margin-top:8px}
 
 .panel{
@@ -178,26 +198,63 @@ background:white;padding:20px;border-radius:16px;
 margin-bottom:20px;overflow:auto
 }
 
-table{width:100%;border-collapse:collapse}
-th,td{padding:12px;border-bottom:1px solid #eee;text-align:left}
+table{
+width:100%;border-collapse:collapse
+}
+th,td{
+padding:12px;border-bottom:1px solid #eee;
+text-align:left
+}
 
 @media(max-width:800px){
+
 .grid{grid-template-columns:1fr 1fr}
+
 .stats{grid-template-columns:1fr 1fr}
-.sidebar{width:65px;padding:10px}
+
+.sidebar{
+width:65px;
+padding:10px
+}
+
 .sidebar h2{font-size:0}
-.sidebar button{font-size:0;text-align:center}
-.admin-main{margin-left:65px;width:calc(100% - 65px);padding:12px}
+
+.sidebar button{
+font-size:0;
+text-align:center
+}
+
+.sidebar button:first-letter{
+font-size:20px
+}
+
+.admin-main{
+margin-left:65px;
+width:calc(100% - 65px);
+padding:12px
+}
+
 }
 
 @media(max-width:550px){
+
 .grid{grid-template-columns:1fr}
+
 .stats{grid-template-columns:1fr}
+
 .hero h1{font-size:28px}
+
 .page{padding:15px}
+
 .top{padding:12px}
+
 .logo{font-size:19px}
-.top-btn{padding:8px;font-size:12px}
+
+.top-btn{
+padding:8px;
+font-size:12px
+}
+
 }
 </style>
 </head>
@@ -292,7 +349,7 @@ Popular Restaurants
 </div>
 
 
-<!-- RESTAURANT MENU -->
+<!-- MENU -->
 
 <div id="menuModal" class="modal hidden">
 
@@ -359,23 +416,20 @@ Place Order 🚴
 
 <input id="customerPhone" placeholder="Phone Number">
 
-<textarea id="customerAddress"
+<textarea
+id="customerAddress"
 placeholder="Delivery Address"
 rows="4"></textarea>
 
 <select id="payment">
-
 <option>Cash on Delivery</option>
 <option>Online Payment</option>
-
 </select>
 
 <button class="btn blue"
 style="width:100%;margin-top:10px"
 onclick="placeOrder()">
-
 One Click = Place Order
-
 </button>
 
 </div>
@@ -404,13 +458,23 @@ One Click = Place Order
 
 <div class="modal-box">
 
+<button class="close"
+onclick="closeAdminLogin()">
+✕
+</button>
+
 <h2>👑 Admin Login</h2>
 
-<input id="adminUser" placeholder="Username">
+<input
+id="adminUser"
+placeholder="Username"
+>
 
-<input id="adminPass"
+<input
+id="adminPass"
 type="password"
-placeholder="Password">
+placeholder="Password"
+>
 
 <button class="btn blue"
 style="width:100%"
@@ -452,6 +516,11 @@ Login
 ➕ Add Restaurant
 </button>
 
+<button class="close-admin"
+onclick="logoutAdmin()">
+❌ Close Admin
+</button>
+
 <button onclick="logoutAdmin()">
 🚪 Logout
 </button>
@@ -460,8 +529,6 @@ Login
 
 
 <div class="admin-main">
-
-<!-- DASHBOARD -->
 
 <section id="dash">
 
@@ -505,8 +572,6 @@ style="margin-top:15px"></div>
 </section>
 
 
-<!-- ORDERS -->
-
 <section id="orders" class="hidden">
 
 <div class="panel">
@@ -520,8 +585,6 @@ style="margin-top:15px"></div>
 
 </section>
 
-
-<!-- RESTAURANTS -->
 
 <section id="restaurants" class="hidden">
 
@@ -537,15 +600,14 @@ style="margin-top:15px"></div>
 </section>
 
 
-<!-- RIDERS -->
-
 <section id="riders" class="hidden">
 
 <div class="panel">
 
 <h2>🛵 Riders</h2>
 
-<button class="btn blue" onclick="addRider()">
+<button class="btn blue"
+onclick="addRider()">
 + Add Rider
 </button>
 
@@ -557,21 +619,23 @@ style="margin-top:15px"></div>
 </section>
 
 
-<!-- ADD RESTAURANT -->
-
 <section id="addRestaurant" class="hidden">
 
 <div class="panel">
 
 <h2>🍔 Add Restaurant</h2>
 
-<input id="rName" placeholder="Restaurant Name">
+<input id="rName"
+placeholder="Restaurant Name">
 
-<input id="rOwner" placeholder="Owner Name">
+<input id="rOwner"
+placeholder="Owner Name">
 
-<input id="rPhone" placeholder="Phone">
+<input id="rPhone"
+placeholder="Phone">
 
-<input id="rAddress" placeholder="Address">
+<input id="rAddress"
+placeholder="Address">
 
 <input id="rPassword"
 type="password"
@@ -611,7 +675,7 @@ let selectedRestaurant=null;
 let selectedCategory="all";
 
 
-/* DEMO DATA */
+/* DEMO RESTAURANTS */
 
 if(restaurants.length===0){
 
@@ -714,15 +778,17 @@ let search=
 
 let list=restaurants.filter(r=>{
 
-if(r.status!=="Active") return false;
+if(r.status!=="Active")return false;
 
 let searchMatch=
 r.name.toLowerCase().includes(search) ||
-r.menu.some(m=>m.name.toLowerCase().includes(search));
+r.menu.some(m=>
+m.name.toLowerCase().includes(search)
+);
 
-if(!searchMatch) return false;
+if(!searchMatch)return false;
 
-if(selectedCategory==="all") return true;
+if(selectedCategory==="all")return true;
 
 return r.menu.some(m=>
 m.name.toLowerCase().includes(selectedCategory)
@@ -938,6 +1004,7 @@ function removeCart(i){
 cart.splice(i,1);
 
 updateCart();
+
 renderCart();
 
 }
@@ -1020,7 +1087,8 @@ status:"New Order",
 
 rider:"Not Assigned",
 
-payment:document.getElementById("payment").value,
+payment:
+document.getElementById("payment").value,
 
 time:new Date().toLocaleString()
 
@@ -1054,8 +1122,7 @@ if(!orders.length){
 box.innerHTML=
 "<p>No orders yet. Place your first order 🍔</p>";
 
-}
-else{
+}else{
 
 box.innerHTML=orders.map(o=>`
 
@@ -1073,21 +1140,30 @@ ${o.items}
 </p>
 
 <p style="margin-top:6px">
-Total: <strong>Rs ${o.total}</strong>
+Total:
+<strong>Rs ${o.total}</strong>
 </p>
 
 <p style="margin-top:8px">
+
 Status:
+
 <span class="badge ${
 o.status==="Delivered"
 ?"done"
 :
 o.status==="Out for Delivery"
 ?"delivery"
+:
+o.status==="Preparing"
+?"active"
 :"pending"
 }">
+
 ${o.status}
+
 </span>
+
 </p>
 
 ${trackingHTML(o.status)}
@@ -1115,52 +1191,44 @@ document.getElementById("myOrdersModal")
 
 function trackingHTML(status){
 
-let newA="";
-let preparing="";
-let delivery="";
-let delivered="";
-
-if(
-status==="New Order" ||
-status==="Preparing" ||
-status==="Out for Delivery" ||
+let a=status==="New Order"||
+status==="Preparing"||
+status==="Out for Delivery"||
 status==="Delivered"
-)newA="active";
+?"active":"";
 
-if(
-status==="Preparing" ||
-status==="Out for Delivery" ||
+let b=status==="Preparing"||
+status==="Out for Delivery"||
 status==="Delivered"
-)preparing="active";
+?"active":"";
 
-if(
-status==="Out for Delivery" ||
+let c=status==="Out for Delivery"||
 status==="Delivered"
-)delivery="active";
+?"active":"";
 
-if(status==="Delivered")
-delivered="active";
+let d=status==="Delivered"
+?"active":"";
 
 return `
 
 <div class="track">
 
-<div class="track-step ${newA}">
+<div class="track-step ${a}">
 <div class="track-icon">📝</div>
 Order
 </div>
 
-<div class="track-step ${preparing}">
+<div class="track-step ${b}">
 <div class="track-icon">🍳</div>
 Preparing
 </div>
 
-<div class="track-step ${delivery}">
+<div class="track-step ${c}">
 <div class="track-icon">🛵</div>
 Delivery
 </div>
 
-<div class="track-step ${delivered}">
+<div class="track-step ${d}">
 <div class="track-icon">✅</div>
 Delivered
 </div>
@@ -1181,16 +1249,24 @@ document.getElementById("adminLogin")
 
 }
 
-function adminLogin(){
-
-let user=document.getElementById("adminUser").value;
-
-let pass=document.getElementById("adminPass").value;
-
-if(user==="admin" && pass==="1234"){
+function closeAdminLogin(){
 
 document.getElementById("adminLogin")
 .classList.add("hidden");
+
+}
+
+function adminLogin(){
+
+let user=
+document.getElementById("adminUser").value;
+
+let pass=
+document.getElementById("adminPass").value;
+
+if(user==="admin" && pass==="1234"){
+
+closeAdminLogin();
 
 document.getElementById("customerApp")
 .classList.add("hidden");
@@ -1200,14 +1276,16 @@ document.getElementById("adminPanel")
 
 renderAdmin();
 
-}
-else{
+}else{
 
 alert("Wrong login.");
 
 }
 
 }
+
+
+/* CLOSE ADMIN */
 
 function logoutAdmin(){
 
@@ -1216,6 +1294,8 @@ document.getElementById("adminPanel")
 
 document.getElementById("customerApp")
 .classList.remove("hidden");
+
+window.scrollTo(0,0);
 
 }
 
@@ -1235,23 +1315,31 @@ renderAdmin();
 }
 
 
-/* ADMIN */
+/* ADMIN RENDER */
 
 function renderAdmin(){
 
-document.getElementById("aOrders").innerText=
-orders.length;
+document.getElementById("aOrders")
+.innerText=orders.length;
 
-document.getElementById("aNew").innerText=
-orders.filter(o=>o.status==="New Order").length;
+document.getElementById("aNew")
+.innerText=
+orders.filter(o=>
+o.status==="New Order"
+).length;
 
-document.getElementById("aRestaurants").innerText=
+document.getElementById("aRestaurants")
+.innerText=
 restaurants.length;
 
-document.getElementById("aDelivered").innerText=
-orders.filter(o=>o.status==="Delivered").length;
+document.getElementById("aDelivered")
+.innerText=
+orders.filter(o=>
+o.status==="Delivered"
+).length;
 
-document.getElementById("recentAdmin").innerHTML=
+document.getElementById("recentAdmin")
+.innerHTML=
 orders.slice(0,5).map(o=>`
 
 <div style="
@@ -1260,7 +1348,10 @@ border-bottom:1px solid #eee">
 
 <strong>#${o.id}</strong>
 <br>
-${o.customer} → ${o.restaurant}
+
+${o.customer} →
+${o.restaurant}
+
 <br>
 
 <span class="badge pending">
@@ -1272,7 +1363,9 @@ ${o.status}
 `).join("");
 
 renderAdminOrders();
+
 renderAdminRestaurants();
+
 renderAdminRiders();
 
 }
@@ -1374,8 +1467,7 @@ function orderStatus(id,status){
 
 orders=orders.map(o=>{
 
-if(o.id===id)
-o.status=status;
+if(o.id===id)o.status=status;
 
 return o;
 
@@ -1392,9 +1484,11 @@ renderAdmin();
 
 function renderAdminRestaurants(){
 
-let box=document.getElementById("adminRestaurants");
+let box=
+document.getElementById("adminRestaurants");
 
-box.innerHTML=restaurants.map(r=>`
+box.innerHTML=
+restaurants.map(r=>`
 
 <div class="card"
 style="padding:18px;margin-bottom:12px">
@@ -1414,9 +1508,13 @@ style="padding:18px;margin-bottom:12px">
 Status:
 
 <span class="badge ${
-r.status==="Active"?"active":"pending"
+r.status==="Active"
+?"active"
+:"pending"
 }">
+
 ${r.status}
+
 </span>
 
 </p>
@@ -1454,6 +1552,7 @@ return r;
 saveData();
 
 renderRestaurants();
+
 renderAdmin();
 
 }
@@ -1463,15 +1562,20 @@ renderAdmin();
 
 function addRestaurant(){
 
-let name=document.getElementById("rName").value.trim();
+let name=
+document.getElementById("rName").value.trim();
 
-let owner=document.getElementById("rOwner").value.trim();
+let owner=
+document.getElementById("rOwner").value.trim();
 
-let phone=document.getElementById("rPhone").value.trim();
+let phone=
+document.getElementById("rPhone").value.trim();
 
-let address=document.getElementById("rAddress").value.trim();
+let address=
+document.getElementById("rAddress").value.trim();
 
-let password=document.getElementById("rPassword").value;
+let password=
+document.getElementById("rPassword").value;
 
 if(!name||!owner||!phone||!password){
 
@@ -1522,7 +1626,8 @@ renderAdmin();
 
 function renderAdminRiders(){
 
-let box=document.getElementById("adminRiders");
+let box=
+document.getElementById("adminRiders");
 
 if(!riders.length){
 
@@ -1532,7 +1637,8 @@ return;
 
 }
 
-box.innerHTML=riders.map(r=>`
+box.innerHTML=
+riders.map(r=>`
 
 <div class="card"
 style="padding:18px;margin-bottom:10px">
@@ -1580,6 +1686,7 @@ renderAdmin();
 /* START */
 
 renderRestaurants();
+
 updateCart();
 
 </script>
