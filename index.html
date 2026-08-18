@@ -1,0 +1,1588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Q-Delivery | Malakand</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+body{background:#f5f7fb;color:#172033}
+button{cursor:pointer}
+.hidden{display:none!important}
+
+.top{
+background:#111827;color:#fff;padding:15px 22px;
+display:flex;justify-content:space-between;align-items:center;
+position:sticky;top:0;z-index:20
+}
+.logo{font-size:23px;font-weight:bold}
+.top-right{display:flex;gap:8px}
+.top-btn{border:0;padding:10px 13px;border-radius:9px;background:#2563eb;color:white;font-weight:bold}
+
+.page{max-width:1150px;margin:auto;padding:25px}
+
+.hero{
+background:linear-gradient(135deg,#2563eb,#16a34a);
+color:white;padding:38px 28px;border-radius:22px;margin-bottom:25px
+}
+.hero h1{font-size:36px;margin-bottom:10px}
+.hero p{margin-bottom:20px}
+
+input,textarea,select{
+width:100%;padding:13px;border:1px solid #ddd;
+border-radius:9px;margin:7px 0
+}
+
+.address{max-width:650px;border:0!important;margin:0!important}
+
+.search{
+width:100%;padding:15px;border:1px solid #ddd;
+border-radius:12px;font-size:15px;margin-bottom:18px
+}
+
+.categories{
+display:flex;gap:10px;overflow-x:auto;
+padding-bottom:10px;margin-bottom:20px
+}
+.category{
+border:0;background:white;padding:11px 16px;
+border-radius:25px;white-space:nowrap;
+box-shadow:0 3px 10px rgba(0,0,0,.06)
+}
+.category.active{background:#2563eb;color:white}
+
+.grid{
+display:grid;grid-template-columns:repeat(3,1fr);gap:20px
+}
+
+.card{
+background:white;border-radius:17px;
+box-shadow:0 5px 20px rgba(0,0,0,.07)
+}
+
+.restaurant{overflow:hidden;cursor:pointer;transition:.2s}
+.restaurant:hover{transform:translateY(-4px)}
+
+.restaurant-img{
+height:150px;display:flex;align-items:center;
+justify-content:center;font-size:65px;
+background:linear-gradient(135deg,#ff7a18,#ffb347)
+}
+
+.restaurant-info{padding:18px}
+.restaurant-title{
+display:flex;justify-content:space-between;gap:10px
+}
+.restaurant-title h2{font-size:19px}
+.meta{font-size:14px;color:#666;margin-top:8px}
+
+.btn{
+border:0;padding:11px 16px;border-radius:9px;
+font-weight:bold
+}
+.blue{background:#2563eb;color:white}
+.green{background:#16a34a;color:white}
+.red{background:#dc2626;color:white}
+.orange{background:#f59e0b;color:white}
+
+.cart{
+position:fixed;right:20px;bottom:20px;
+background:#111827;color:white;padding:15px 22px;
+border-radius:30px;font-weight:bold;
+box-shadow:0 5px 20px rgba(0,0,0,.25);
+z-index:25
+}
+
+.modal{
+position:fixed;inset:0;background:rgba(0,0,0,.55);
+display:flex;align-items:center;justify-content:center;
+padding:20px;z-index:50
+}
+.modal-box{
+background:white;border-radius:20px;padding:25px;
+width:100%;max-width:520px;max-height:90vh;overflow:auto
+}
+.close{float:right;border:0;background:none;font-size:23px}
+
+.menu{
+display:flex;justify-content:space-between;align-items:center;
+padding:15px 0;border-bottom:1px solid #eee
+}
+.price{color:#16a34a;font-weight:bold}
+
+.total{
+display:flex;justify-content:space-between;padding:8px 0
+}
+.big-total{
+font-size:21px;font-weight:bold;
+border-top:1px solid #ddd;margin-top:10px;padding-top:12px
+}
+
+.badge{
+padding:5px 10px;border-radius:20px;
+font-size:12px;font-weight:bold
+}
+.active{background:#dcfce7;color:#166534}
+.pending{background:#fef3c7;color:#92400e}
+.delivery{background:#dbeafe;color:#1e40af}
+.done{background:#dcfce7;color:#166534}
+
+.track{
+display:flex;justify-content:space-between;
+margin:25px 0;position:relative
+}
+.track-step{
+text-align:center;position:relative;z-index:2;
+font-size:12px;width:25%
+}
+.track-icon{
+width:40px;height:40px;border-radius:50%;
+background:#ddd;display:flex;align-items:center;
+justify-content:center;margin:auto auto 7px
+}
+.track-step.active .track-icon{
+background:#16a34a;color:white
+}
+
+.admin-layout{display:flex;min-height:100vh}
+.sidebar{
+width:230px;background:#111827;color:white;
+padding:20px;position:fixed;height:100vh
+}
+.sidebar h2{text-align:center;margin-bottom:25px}
+.sidebar button{
+display:block;width:100%;padding:12px;margin:6px 0;
+border:0;background:transparent;color:#ddd;
+text-align:left;border-radius:9px
+}
+.sidebar button:hover{background:#2563eb;color:white}
+
+.admin-main{
+margin-left:230px;padding:25px;
+width:calc(100% - 230px)
+}
+
+.stats{
+display:grid;grid-template-columns:repeat(4,1fr);
+gap:15px;margin-bottom:20px
+}
+.stat{
+background:white;padding:20px;border-radius:15px;
+box-shadow:0 4px 15px rgba(0,0,0,.06)
+}
+.stat h2{font-size:28px;margin-top:8px}
+
+.panel{
+background:white;padding:20px;border-radius:16px;
+margin-bottom:20px;overflow:auto
+}
+
+table{width:100%;border-collapse:collapse}
+th,td{padding:12px;border-bottom:1px solid #eee;text-align:left}
+
+@media(max-width:800px){
+.grid{grid-template-columns:1fr 1fr}
+.stats{grid-template-columns:1fr 1fr}
+.sidebar{width:65px;padding:10px}
+.sidebar h2{font-size:0}
+.sidebar button{font-size:0;text-align:center}
+.admin-main{margin-left:65px;width:calc(100% - 65px);padding:12px}
+}
+
+@media(max-width:550px){
+.grid{grid-template-columns:1fr}
+.stats{grid-template-columns:1fr}
+.hero h1{font-size:28px}
+.page{padding:15px}
+.top{padding:12px}
+.logo{font-size:19px}
+.top-btn{padding:8px;font-size:12px}
+}
+</style>
+</head>
+
+<body>
+
+<!-- CUSTOMER APP -->
+
+<div id="customerApp">
+
+<div class="top">
+
+<div class="logo">🚴 Q-Delivery</div>
+
+<div class="top-right">
+
+<button class="top-btn" onclick="openMyOrders()">
+📦 My Orders
+</button>
+
+<button class="top-btn" onclick="openAdminLogin()">
+👑 Admin
+</button>
+
+</div>
+</div>
+
+<div class="page">
+
+<div class="hero">
+
+<h1>Food delivered to your door 🍔</h1>
+
+<p>Fast & reliable delivery in Malakand</p>
+
+<input
+class="address"
+id="address"
+placeholder="📍 Enter your delivery address"
+>
+
+</div>
+
+<input
+class="search"
+id="restaurantSearch"
+placeholder="🔎 Search restaurant or food..."
+oninput="renderRestaurants()"
+>
+
+<div class="categories">
+
+<button class="category active"
+onclick="filterCategory('all',this)">
+🍽️ All
+</button>
+
+<button class="category"
+onclick="filterCategory('burger',this)">
+🍔 Burgers
+</button>
+
+<button class="category"
+onclick="filterCategory('pizza',this)">
+🍕 Pizza
+</button>
+
+<button class="category"
+onclick="filterCategory('biryani',this)">
+🍚 Biryani
+</button>
+
+<button class="category"
+onclick="filterCategory('fries',this)">
+🍟 Fast Food
+</button>
+
+</div>
+
+<h2 style="margin-bottom:15px">
+Popular Restaurants
+</h2>
+
+<div class="grid" id="restaurantGrid"></div>
+
+</div>
+
+<div class="cart" onclick="openCart()">
+🛒 Cart (<span id="cartCount">0</span>)
+</div>
+
+</div>
+
+
+<!-- RESTAURANT MENU -->
+
+<div id="menuModal" class="modal hidden">
+
+<div class="modal-box">
+
+<button class="close" onclick="closeMenu()">✕</button>
+
+<h2 id="menuRestaurantName"></h2>
+
+<div id="menuItems" style="margin-top:20px"></div>
+
+</div>
+</div>
+
+
+<!-- CART -->
+
+<div id="cartModal" class="modal hidden">
+
+<div class="modal-box">
+
+<button class="close" onclick="closeCart()">✕</button>
+
+<h2>🛒 Your Cart</h2>
+
+<div id="cartItems" style="margin-top:20px"></div>
+
+<div class="total">
+<span>Subtotal</span>
+<strong>Rs <span id="subtotal">0</span></strong>
+</div>
+
+<div class="total">
+<span>Delivery Fee</span>
+<strong>Rs <span id="deliveryFee">100</span></strong>
+</div>
+
+<div class="total big-total">
+<span>Total</span>
+<strong>Rs <span id="grandTotal">100</span></strong>
+</div>
+
+<button class="btn green"
+style="width:100%;margin-top:15px"
+onclick="openCheckout()">
+Place Order 🚴
+</button>
+
+</div>
+</div>
+
+
+<!-- CHECKOUT -->
+
+<div id="checkoutModal" class="modal hidden">
+
+<div class="modal-box">
+
+<button class="close" onclick="closeCheckout()">✕</button>
+
+<h2>📦 Delivery Details</h2>
+
+<input id="customerName" placeholder="Your Name">
+
+<input id="customerPhone" placeholder="Phone Number">
+
+<textarea id="customerAddress"
+placeholder="Delivery Address"
+rows="4"></textarea>
+
+<select id="payment">
+
+<option>Cash on Delivery</option>
+<option>Online Payment</option>
+
+</select>
+
+<button class="btn blue"
+style="width:100%;margin-top:10px"
+onclick="placeOrder()">
+
+One Click = Place Order
+
+</button>
+
+</div>
+</div>
+
+
+<!-- MY ORDERS -->
+
+<div id="myOrdersModal" class="modal hidden">
+
+<div class="modal-box">
+
+<button class="close" onclick="closeMyOrders()">✕</button>
+
+<h2>📦 My Orders</h2>
+
+<div id="myOrdersList" style="margin-top:20px"></div>
+
+</div>
+</div>
+
+
+<!-- ADMIN LOGIN -->
+
+<div id="adminLogin" class="modal hidden">
+
+<div class="modal-box">
+
+<h2>👑 Admin Login</h2>
+
+<input id="adminUser" placeholder="Username">
+
+<input id="adminPass"
+type="password"
+placeholder="Password">
+
+<button class="btn blue"
+style="width:100%"
+onclick="adminLogin()">
+Login
+</button>
+
+</div>
+</div>
+
+
+<!-- ADMIN PANEL -->
+
+<div id="adminPanel" class="hidden">
+
+<div class="admin-layout">
+
+<div class="sidebar">
+
+<h2>🚴 Q-Delivery</h2>
+
+<button onclick="adminPage('dash')">
+📊 Dashboard
+</button>
+
+<button onclick="adminPage('orders')">
+📦 Orders
+</button>
+
+<button onclick="adminPage('restaurants')">
+🍔 Restaurants
+</button>
+
+<button onclick="adminPage('riders')">
+🛵 Riders
+</button>
+
+<button onclick="adminPage('addRestaurant')">
+➕ Add Restaurant
+</button>
+
+<button onclick="logoutAdmin()">
+🚪 Logout
+</button>
+
+</div>
+
+
+<div class="admin-main">
+
+<!-- DASHBOARD -->
+
+<section id="dash">
+
+<h1 style="margin-bottom:20px">
+Admin Dashboard
+</h1>
+
+<div class="stats">
+
+<div class="stat">
+<small>Total Orders</small>
+<h2 id="aOrders">0</h2>
+</div>
+
+<div class="stat">
+<small>New Orders</small>
+<h2 id="aNew">0</h2>
+</div>
+
+<div class="stat">
+<small>Restaurants</small>
+<h2 id="aRestaurants">0</h2>
+</div>
+
+<div class="stat">
+<small>Delivered</small>
+<h2 id="aDelivered">0</h2>
+</div>
+
+</div>
+
+<div class="panel">
+
+<h2>Recent Orders</h2>
+
+<div id="recentAdmin"
+style="margin-top:15px"></div>
+
+</div>
+
+</section>
+
+
+<!-- ORDERS -->
+
+<section id="orders" class="hidden">
+
+<div class="panel">
+
+<h2>📦 All Orders</h2>
+
+<div id="adminOrders"
+style="margin-top:15px"></div>
+
+</div>
+
+</section>
+
+
+<!-- RESTAURANTS -->
+
+<section id="restaurants" class="hidden">
+
+<div class="panel">
+
+<h2>🍔 Restaurants</h2>
+
+<div id="adminRestaurants"
+style="margin-top:15px"></div>
+
+</div>
+
+</section>
+
+
+<!-- RIDERS -->
+
+<section id="riders" class="hidden">
+
+<div class="panel">
+
+<h2>🛵 Riders</h2>
+
+<button class="btn blue" onclick="addRider()">
++ Add Rider
+</button>
+
+<div id="adminRiders"
+style="margin-top:15px"></div>
+
+</div>
+
+</section>
+
+
+<!-- ADD RESTAURANT -->
+
+<section id="addRestaurant" class="hidden">
+
+<div class="panel">
+
+<h2>🍔 Add Restaurant</h2>
+
+<input id="rName" placeholder="Restaurant Name">
+
+<input id="rOwner" placeholder="Owner Name">
+
+<input id="rPhone" placeholder="Phone">
+
+<input id="rAddress" placeholder="Address">
+
+<input id="rPassword"
+type="password"
+placeholder="Password">
+
+<button class="btn blue"
+onclick="addRestaurant()">
+Register Restaurant
+</button>
+
+</div>
+
+</section>
+
+</div>
+</div>
+</div>
+
+
+<script>
+
+/* DATA */
+
+let restaurants =
+JSON.parse(localStorage.getItem("qRestaurants")) || [];
+
+let orders =
+JSON.parse(localStorage.getItem("qOrders")) || [];
+
+let riders =
+JSON.parse(localStorage.getItem("qRiders")) || [];
+
+let cart=[];
+
+let selectedRestaurant=null;
+
+let selectedCategory="all";
+
+
+/* DEMO DATA */
+
+if(restaurants.length===0){
+
+restaurants=[
+
+{
+id:1,
+name:"Shahid Restaurant",
+owner:"Shahid",
+phone:"03001234567",
+address:"Batkhela",
+status:"Active",
+menu:[
+{name:"Chicken Biryani",price:350},
+{name:"Chicken Karahi",price:800},
+{name:"Burger",price:300}
+]
+},
+
+{
+id:2,
+name:"Batkhela Fast Food",
+owner:"Huzaifa",
+phone:"03007654321",
+address:"Batkhela",
+status:"Active",
+menu:[
+{name:"Zinger Burger",price:450},
+{name:"Pizza",price:900},
+{name:"Fries",price:200}
+]
+},
+
+{
+id:3,
+name:"Malakand Pizza House",
+owner:"Malakand",
+phone:"03001112233",
+address:"Malakand",
+status:"Active",
+menu:[
+{name:"Chicken Pizza",price:900},
+{name:"Cheese Pizza",price:1000},
+{name:"Fries",price:200}
+]
+}
+
+];
+
+saveData();
+
+}
+
+
+/* SAVE */
+
+function saveData(){
+
+localStorage.setItem(
+"qRestaurants",
+JSON.stringify(restaurants)
+);
+
+localStorage.setItem(
+"qOrders",
+JSON.stringify(orders)
+);
+
+localStorage.setItem(
+"qRiders",
+JSON.stringify(riders)
+);
+
+}
+
+
+/* CATEGORY */
+
+function filterCategory(category,button){
+
+selectedCategory=category;
+
+document.querySelectorAll(".category")
+.forEach(x=>x.classList.remove("active"));
+
+button.classList.add("active");
+
+renderRestaurants();
+
+}
+
+
+/* RESTAURANTS */
+
+function renderRestaurants(){
+
+let search=
+(document.getElementById("restaurantSearch").value||"")
+.toLowerCase();
+
+let list=restaurants.filter(r=>{
+
+if(r.status!=="Active") return false;
+
+let searchMatch=
+r.name.toLowerCase().includes(search) ||
+r.menu.some(m=>m.name.toLowerCase().includes(search));
+
+if(!searchMatch) return false;
+
+if(selectedCategory==="all") return true;
+
+return r.menu.some(m=>
+m.name.toLowerCase().includes(selectedCategory)
+);
+
+});
+
+let grid=document.getElementById("restaurantGrid");
+
+if(!list.length){
+
+grid.innerHTML="<p>No restaurant found.</p>";
+
+return;
+
+}
+
+grid.innerHTML=list.map(r=>`
+
+<div class="card restaurant"
+onclick="openRestaurant(${r.id})">
+
+<div class="restaurant-img">
+
+${
+r.name.toLowerCase().includes("pizza")
+?"🍕"
+:
+r.name.toLowerCase().includes("fast")
+?"🍔"
+:"🍛"
+}
+
+</div>
+
+<div class="restaurant-info">
+
+<div class="restaurant-title">
+
+<h2>${r.name}</h2>
+
+<span>⭐ 4.8</span>
+
+</div>
+
+<div class="meta">
+🍽️ Pakistani • Fast Food
+</div>
+
+<div class="meta">
+📍 ${r.address||"Malakand"}
+</div>
+
+<div class="meta">
+🛵 25–35 min
+</div>
+
+<div style="margin-top:12px">
+
+<span class="badge active">
+● Open
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+`).join("");
+
+}
+
+
+/* MENU */
+
+function openRestaurant(id){
+
+selectedRestaurant=
+restaurants.find(r=>r.id===id);
+
+document.getElementById("menuRestaurantName")
+.innerText=selectedRestaurant.name;
+
+document.getElementById("menuItems").innerHTML=
+selectedRestaurant.menu.map((m,i)=>`
+
+<div class="menu">
+
+<div>
+<strong>${m.name}</strong>
+<br>
+<span class="price">Rs ${m.price}</span>
+</div>
+
+<button class="btn blue"
+onclick="addToCart(${selectedRestaurant.id},${i})">
++ Add
+</button>
+
+</div>
+
+`).join("");
+
+document.getElementById("menuModal")
+.classList.remove("hidden");
+
+}
+
+function closeMenu(){
+
+document.getElementById("menuModal")
+.classList.add("hidden");
+
+}
+
+
+/* CART */
+
+function addToCart(rid,index){
+
+let r=restaurants.find(x=>x.id===rid);
+
+let item=r.menu[index];
+
+cart.push({
+restaurantId:rid,
+restaurant:r.name,
+name:item.name,
+price:Number(item.price)
+});
+
+updateCart();
+
+}
+
+function updateCart(){
+
+document.getElementById("cartCount")
+.innerText=cart.length;
+
+}
+
+function openCart(){
+
+renderCart();
+
+document.getElementById("cartModal")
+.classList.remove("hidden");
+
+}
+
+function closeCart(){
+
+document.getElementById("cartModal")
+.classList.add("hidden");
+
+}
+
+function renderCart(){
+
+let box=document.getElementById("cartItems");
+
+if(!cart.length){
+
+box.innerHTML="<p>Your cart is empty 🛒</p>";
+
+document.getElementById("subtotal").innerText=0;
+
+document.getElementById("grandTotal").innerText=100;
+
+return;
+
+}
+
+box.innerHTML=cart.map((x,i)=>`
+
+<div style="
+display:flex;
+justify-content:space-between;
+padding:10px 0;
+border-bottom:1px solid #eee">
+
+<span>${x.name}</span>
+
+<strong>
+Rs ${x.price}
+
+<button class="btn red"
+onclick="removeCart(${i})">
+×
+</button>
+
+</strong>
+
+</div>
+
+`).join("");
+
+let subtotal=
+cart.reduce((sum,x)=>sum+x.price,0);
+
+document.getElementById("subtotal")
+.innerText=subtotal;
+
+document.getElementById("grandTotal")
+.innerText=subtotal+100;
+
+}
+
+function removeCart(i){
+
+cart.splice(i,1);
+
+updateCart();
+renderCart();
+
+}
+
+
+/* CHECKOUT */
+
+function openCheckout(){
+
+if(!cart.length){
+
+alert("Cart is empty.");
+
+return;
+
+}
+
+closeCart();
+
+document.getElementById("checkoutModal")
+.classList.remove("hidden");
+
+}
+
+function closeCheckout(){
+
+document.getElementById("checkoutModal")
+.classList.add("hidden");
+
+}
+
+
+/* PLACE ORDER */
+
+function placeOrder(){
+
+let name=
+document.getElementById("customerName").value.trim();
+
+let phone=
+document.getElementById("customerPhone").value.trim();
+
+let address=
+document.getElementById("customerAddress").value.trim();
+
+if(!name||!phone||!address){
+
+alert("Please fill all details.");
+
+return;
+
+}
+
+let subtotal=
+cart.reduce((sum,x)=>sum+x.price,0);
+
+let order={
+
+id:Date.now(),
+
+customer:name,
+
+phone:phone,
+
+address:address,
+
+restaurantId:cart[0].restaurantId,
+
+restaurant:cart[0].restaurant,
+
+items:cart.map(x=>x.name).join(", "),
+
+subtotal:subtotal,
+
+deliveryFee:100,
+
+total:subtotal+100,
+
+status:"New Order",
+
+rider:"Not Assigned",
+
+payment:document.getElementById("payment").value,
+
+time:new Date().toLocaleString()
+
+};
+
+orders.unshift(order);
+
+saveData();
+
+cart=[];
+
+updateCart();
+
+closeCheckout();
+
+alert("Order placed successfully! 🚴");
+
+openMyOrders();
+
+}
+
+
+/* MY ORDERS */
+
+function openMyOrders(){
+
+let box=document.getElementById("myOrdersList");
+
+if(!orders.length){
+
+box.innerHTML=
+"<p>No orders yet. Place your first order 🍔</p>";
+
+}
+else{
+
+box.innerHTML=orders.map(o=>`
+
+<div class="card"
+style="padding:18px;margin-bottom:15px">
+
+<h3>📦 Order #${o.id}</h3>
+
+<p style="margin-top:8px">
+${o.restaurant}
+</p>
+
+<p style="margin-top:6px">
+${o.items}
+</p>
+
+<p style="margin-top:6px">
+Total: <strong>Rs ${o.total}</strong>
+</p>
+
+<p style="margin-top:8px">
+Status:
+<span class="badge ${
+o.status==="Delivered"
+?"done"
+:
+o.status==="Out for Delivery"
+?"delivery"
+:"pending"
+}">
+${o.status}
+</span>
+</p>
+
+${trackingHTML(o.status)}
+
+</div>
+
+`).join("");
+
+}
+
+document.getElementById("myOrdersModal")
+.classList.remove("hidden");
+
+}
+
+function closeMyOrders(){
+
+document.getElementById("myOrdersModal")
+.classList.add("hidden");
+
+}
+
+
+/* TRACKING */
+
+function trackingHTML(status){
+
+let newA="";
+let preparing="";
+let delivery="";
+let delivered="";
+
+if(
+status==="New Order" ||
+status==="Preparing" ||
+status==="Out for Delivery" ||
+status==="Delivered"
+)newA="active";
+
+if(
+status==="Preparing" ||
+status==="Out for Delivery" ||
+status==="Delivered"
+)preparing="active";
+
+if(
+status==="Out for Delivery" ||
+status==="Delivered"
+)delivery="active";
+
+if(status==="Delivered")
+delivered="active";
+
+return `
+
+<div class="track">
+
+<div class="track-step ${newA}">
+<div class="track-icon">📝</div>
+Order
+</div>
+
+<div class="track-step ${preparing}">
+<div class="track-icon">🍳</div>
+Preparing
+</div>
+
+<div class="track-step ${delivery}">
+<div class="track-icon">🛵</div>
+Delivery
+</div>
+
+<div class="track-step ${delivered}">
+<div class="track-icon">✅</div>
+Delivered
+</div>
+
+</div>
+
+`;
+
+}
+
+
+/* ADMIN LOGIN */
+
+function openAdminLogin(){
+
+document.getElementById("adminLogin")
+.classList.remove("hidden");
+
+}
+
+function adminLogin(){
+
+let user=document.getElementById("adminUser").value;
+
+let pass=document.getElementById("adminPass").value;
+
+if(user==="admin" && pass==="1234"){
+
+document.getElementById("adminLogin")
+.classList.add("hidden");
+
+document.getElementById("customerApp")
+.classList.add("hidden");
+
+document.getElementById("adminPanel")
+.classList.remove("hidden");
+
+renderAdmin();
+
+}
+else{
+
+alert("Wrong login.");
+
+}
+
+}
+
+function logoutAdmin(){
+
+document.getElementById("adminPanel")
+.classList.add("hidden");
+
+document.getElementById("customerApp")
+.classList.remove("hidden");
+
+}
+
+
+/* ADMIN NAV */
+
+function adminPage(page){
+
+document.querySelectorAll(".admin-main section")
+.forEach(x=>x.classList.add("hidden"));
+
+document.getElementById(page)
+.classList.remove("hidden");
+
+renderAdmin();
+
+}
+
+
+/* ADMIN */
+
+function renderAdmin(){
+
+document.getElementById("aOrders").innerText=
+orders.length;
+
+document.getElementById("aNew").innerText=
+orders.filter(o=>o.status==="New Order").length;
+
+document.getElementById("aRestaurants").innerText=
+restaurants.length;
+
+document.getElementById("aDelivered").innerText=
+orders.filter(o=>o.status==="Delivered").length;
+
+document.getElementById("recentAdmin").innerHTML=
+orders.slice(0,5).map(o=>`
+
+<div style="
+padding:12px;
+border-bottom:1px solid #eee">
+
+<strong>#${o.id}</strong>
+<br>
+${o.customer} → ${o.restaurant}
+<br>
+
+<span class="badge pending">
+${o.status}
+</span>
+
+</div>
+
+`).join("");
+
+renderAdminOrders();
+renderAdminRestaurants();
+renderAdminRiders();
+
+}
+
+
+/* ADMIN ORDERS */
+
+function renderAdminOrders(){
+
+let box=document.getElementById("adminOrders");
+
+if(!orders.length){
+
+box.innerHTML="<p>No orders yet.</p>";
+
+return;
+
+}
+
+box.innerHTML=`
+
+<table>
+
+<tr>
+<th>Order</th>
+<th>Customer</th>
+<th>Restaurant</th>
+<th>Total</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+
+${orders.map(o=>`
+
+<tr>
+
+<td>#${o.id}</td>
+
+<td>
+${o.customer}<br>
+<small>${o.phone}</small>
+</td>
+
+<td>${o.restaurant}</td>
+
+<td>Rs ${o.total}</td>
+
+<td>
+
+<span class="badge ${
+o.status==="Delivered"
+?"done"
+:
+o.status==="Out for Delivery"
+?"delivery"
+:
+o.status==="Preparing"
+?"active"
+:"pending"
+}">
+
+${o.status}
+
+</span>
+
+</td>
+
+<td>
+
+<button class="btn orange"
+onclick="orderStatus(${o.id},'Preparing')">
+🍳
+</button>
+
+<button class="btn blue"
+onclick="orderStatus(${o.id},'Out for Delivery')">
+🛵
+</button>
+
+<button class="btn green"
+onclick="orderStatus(${o.id},'Delivered')">
+✅
+</button>
+
+</td>
+
+</tr>
+
+`).join("")}
+
+</table>
+
+`;
+
+}
+
+
+function orderStatus(id,status){
+
+orders=orders.map(o=>{
+
+if(o.id===id)
+o.status=status;
+
+return o;
+
+});
+
+saveData();
+
+renderAdmin();
+
+}
+
+
+/* RESTAURANTS ADMIN */
+
+function renderAdminRestaurants(){
+
+let box=document.getElementById("adminRestaurants");
+
+box.innerHTML=restaurants.map(r=>`
+
+<div class="card"
+style="padding:18px;margin-bottom:12px">
+
+<h3>🍔 ${r.name}</h3>
+
+<p style="margin-top:7px">
+👤 Owner: ${r.owner}
+</p>
+
+<p>📞 ${r.phone}</p>
+
+<p>📍 ${r.address||"Malakand"}</p>
+
+<p style="margin-top:8px">
+
+Status:
+
+<span class="badge ${
+r.status==="Active"?"active":"pending"
+}">
+${r.status}
+</span>
+
+</p>
+
+${
+r.status!=="Active"
+?
+`
+<button class="btn green"
+onclick="approveRestaurant(${r.id})">
+Approve
+</button>
+`
+:""
+}
+
+</div>
+
+`).join("");
+
+}
+
+
+function approveRestaurant(id){
+
+restaurants=restaurants.map(r=>{
+
+if(r.id===id)
+r.status="Active";
+
+return r;
+
+});
+
+saveData();
+
+renderRestaurants();
+renderAdmin();
+
+}
+
+
+/* ADD RESTAURANT */
+
+function addRestaurant(){
+
+let name=document.getElementById("rName").value.trim();
+
+let owner=document.getElementById("rOwner").value.trim();
+
+let phone=document.getElementById("rPhone").value.trim();
+
+let address=document.getElementById("rAddress").value.trim();
+
+let password=document.getElementById("rPassword").value;
+
+if(!name||!owner||!phone||!password){
+
+alert("Fill all required fields.");
+
+return;
+
+}
+
+restaurants.push({
+
+id:Date.now(),
+
+name:name,
+
+owner:owner,
+
+phone:phone,
+
+address:address,
+
+password:password,
+
+status:"Pending",
+
+menu:[
+
+{name:"Burger",price:300},
+
+{name:"Biryani",price:350}
+
+]
+
+});
+
+saveData();
+
+alert(
+"Restaurant registered. Waiting for approval."
+);
+
+renderAdmin();
+
+}
+
+
+/* RIDERS */
+
+function renderAdminRiders(){
+
+let box=document.getElementById("adminRiders");
+
+if(!riders.length){
+
+box.innerHTML="<p>No riders yet.</p>";
+
+return;
+
+}
+
+box.innerHTML=riders.map(r=>`
+
+<div class="card"
+style="padding:18px;margin-bottom:10px">
+
+<h3>🛵 ${r.name}</h3>
+
+<p>📞 ${r.phone}</p>
+
+<span class="badge active">
+Online
+</span>
+
+</div>
+
+`).join("");
+
+}
+
+
+function addRider(){
+
+let name=prompt("Rider name:");
+
+let phone=prompt("Rider phone:");
+
+if(!name||!phone)return;
+
+riders.push({
+
+id:Date.now(),
+
+name:name,
+
+phone:phone
+
+});
+
+saveData();
+
+renderAdmin();
+
+}
+
+
+/* START */
+
+renderRestaurants();
+updateCart();
+
+</script>
+
+</body>
+</html>
